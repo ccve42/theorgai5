@@ -31,7 +31,7 @@ const FaqSection: React.FC = () => {
     },
     {
       question: "Still have questions?",
-      answer: "Click the orange circle on the bottom right of your screen. Ask anything about AI Organization to the Live Chat."
+      answer: "Click the blue circle on the bottom right of your screen. Ask anything about AI Organization to the Live Chat."
     }
   ];
 
