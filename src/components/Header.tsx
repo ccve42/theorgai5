@@ -21,14 +21,14 @@ const Header: React.FC = () => {
   }, [location]);
   
   const navItems = [
-    { name: 'Products', id: 'products' },
+    { name: 'Solution', id: 'solutions' },
     { name: 'Demo', id: 'demos' },
     { name: 'Process', id: 'processes' }
   ];
   
   return (
     <header 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`transition-all duration-300 ${
         isScrolled ? 'py-2 sm:py-3 bg-black/90 backdrop-blur-md' : 'py-3 sm:py-5 bg-transparent'
       }`}
     >
