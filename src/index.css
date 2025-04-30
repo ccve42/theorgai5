@@ -1,0 +1,534 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   Base Styles
+   ========================================================================== */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 0;
+    font-size: 16px;
+    -webkit-tap-highlight-color: transparent;
+    box-sizing: border-box;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    @apply bg-black text-neutral-300 font-sans selection:bg-neutral-700 selection:text-white;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv03";
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    position: relative;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-transparent bg-gradient-to-b from-neutral-50 to-neutral-300 bg-clip-text leading-tight;
+  }
+  
+  h1 {
+    @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight;
+  }
+  
+  h2 {
+    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight;
+  }
+  
+  h3 {
+    @apply text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight;
+  }
+  
+  h4 {
+    @apply text-lg sm:text-xl md:text-2xl font-semibold tracking-tight;
+  }
+
+  /* Improve touch targets on mobile */
+  button, 
+  [role="button"],
+  a {
+    @apply min-h-[44px] min-w-[44px] md:min-h-0 md:min-w-0;
+  }
+}
+
+/* ==========================================================================
+   Component Styles
+   ========================================================================== */
+@layer components {
+  .glassmorphism {
+    @apply relative backdrop-blur-lg bg-black/40 border border-neutral-800 shadow-lg;
+  }
+  
+  .btn-primary {
+    @apply px-4 sm:px-6 py-2.5 sm:py-3 font-medium text-sm bg-gradient-to-b from-white to-neutral-200 
+      text-black transition-all rounded-md shadow-glow
+      hover:shadow-glow-lg hover:scale-105 active:scale-95
+      focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-black;
+  }
+  
+  .btn-secondary {
+    @apply px-4 sm:px-6 py-2.5 sm:py-3 font-medium text-sm bg-black/60 text-white border border-neutral-700 
+      transition-all rounded-md hover:border-white hover:bg-black/80 active:scale-95
+      focus:outline-none focus:ring-2 focus:ring-white/30;
+  }
+  
+  .card {
+    @apply bg-black/80 border border-neutral-800 rounded-lg overflow-hidden;
+  }
+  
+  .bento-grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8;
+  }
+  
+  .bento-item {
+    @apply rounded-xl overflow-hidden p-4 sm:p-6 md:p-8 bg-black/80 border border-neutral-800
+      transition-all duration-300 hover:shadow-glow-sm hover:border-neutral-600;
+  }
+  
+  .bento-item.large {
+    @apply lg:col-span-2 lg:row-span-2;
+  }
+  
+  .glow-on-hover {
+    @apply relative after:absolute after:inset-0 after:rounded-lg
+      after:opacity-0 after:transition-opacity after:duration-300 
+      hover:after:opacity-100 after:bg-gradient-to-b after:from-transparent 
+      after:via-transparent after:to-white/5;
+  }
+  
+  .feature-card {
+    @apply relative overflow-hidden transition-all duration-500 hover:scale-[1.02]
+      focus-within:scale-[1.02] focus-within:shadow-glow-sm;
+  }
+  
+  .feature-card::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 transition-opacity duration-500;
+  }
+  
+  .feature-card:hover::before {
+    @apply opacity-100;
+  }
+  
+  .feature-icon {
+    @apply transition-all duration-500 transform;
+  }
+  
+  .feature-card:hover .feature-icon {
+    @apply scale-110 rotate-3;
+  }
+  
+  .feature-stat {
+    @apply transition-all duration-300 transform hover:scale-105 hover:bg-white/10;
+  }
+  
+  .glossy-black {
+    @apply bg-gradient-to-b from-neutral-900 to-black relative overflow-hidden;
+  }
+  
+  .glossy-black::after {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-b from-white/10 to-transparent opacity-50 pointer-events-none;
+  }
+  
+  .loader {
+    @apply inline-block w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin;
+  }
+  
+  .animate-spotlight {
+    animation: spotlight 2s ease 0.75s 1 forwards;
+  }
+
+  .problem-section {
+    @apply py-24 bg-black relative overflow-hidden;
+  }
+  
+  .problem-section .glassmorphism {
+    @apply backdrop-blur-lg bg-black/40 border border-neutral-800 shadow-lg transition-all duration-300;
+  }
+  
+  .problem-section .glassmorphism:hover {
+    @apply border-neutral-700 shadow-glow-sm;
+  }
+
+  .problem-section .decorative-element {
+    @apply absolute rounded-full bg-white/[0.02] blur-3xl pointer-events-none;
+  }
+
+  .problem-section .problem-description {
+    @apply text-neutral-300 text-lg leading-relaxed mb-6;
+  }
+
+  .problem-section .solution-description {
+    @apply text-white text-xl font-medium leading-relaxed mb-6;
+  }
+
+  .problem-section .cta-button {
+    @apply btn-primary inline-flex items-center gap-2 text-lg px-8 py-4 hover:scale-105 transform transition-transform duration-300;
+  }
+
+  /* Voice Call Button Styles */
+  .voice-call-button {
+    @apply w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 relative overflow-hidden;
+    transform-origin: center;
+    background: conic-gradient(from 225deg at 50% 50%, #15803d, #22c55e, #4ade80, #22c55e, #15803d) border-box;
+    box-shadow: 0 0 20px rgba(34, 197, 94, 0.6), 
+                0 0 40px rgba(34, 197, 94, 0.3),
+                inset 0 0 10px rgba(255, 255, 255, 0.3);
+    background-size: 200% 200%;
+    animation: gradient-shift 3s ease infinite;
+    backdrop-filter: blur(4px);
+  }
+
+  .voice-call-button::before {
+    content: '';
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    right: 1px;
+    bottom: 1px;
+    background: rgba(34, 197, 94, 0.8);
+    border-radius: 50%;
+    z-index: 0;
+    background: radial-gradient(circle at center, rgba(74, 222, 128, 0.9), rgba(34, 197, 94, 0.9));
+  }
+
+  .voice-call-button:hover {
+    @apply scale-110;
+    box-shadow: 0 0 30px rgba(34, 197, 94, 0.8), 
+                0 0 60px rgba(34, 197, 94, 0.5),
+                inset 0 0 15px rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px) scale(1.1);
+  }
+
+  .voice-call-button:after {
+    content: '';
+    position: absolute;
+    width: 150%;
+    height: 150%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transform: translateX(-150%) rotate(45deg);
+    transition: 0.3s;
+  }
+
+  .voice-call-button:hover:after {
+    transform: translateX(150%) rotate(45deg);
+  }
+
+  .voice-call-button:active {
+    @apply scale-95;
+    box-shadow: 0 0 15px rgba(34, 197, 94, 0.5), 
+                inset 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .voice-call-button.active {
+    background: conic-gradient(from 225deg at 50% 50%, #b91c1c, #ef4444, #f87171, #ef4444, #b91c1c);
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.6), 
+                0 0 40px rgba(239, 68, 68, 0.3),
+                inset 0 0 10px rgba(255, 255, 255, 0.3);
+    animation: gradient-shift 3s ease infinite;
+  }
+
+  .voice-call-button.active::before {
+    background: radial-gradient(circle at center, rgba(248, 113, 113, 0.9), rgba(239, 68, 68, 0.9));
+  }
+
+  .voice-call-button.active:hover {
+    box-shadow: 0 0 30px rgba(239, 68, 68, 0.8), 
+                0 0 60px rgba(239, 68, 68, 0.4),
+                inset 0 0 15px rgba(255, 255, 255, 0.4);
+  }
+
+  .voice-call-button.loading {
+    animation: pulsate 1.5s infinite ease-in-out;
+    background: conic-gradient(from 225deg at 50% 50%, #15803d, #22c55e, #4ade80, #22c55e, #15803d);
+    box-shadow: 0 0 20px rgba(34, 197, 94, 0.6), 
+                0 0 40px rgba(34, 197, 94, 0.3),
+                inset 0 0 10px rgba(255, 255, 255, 0.3);
+  }
+
+  .voice-call-button.loading::before {
+    background: radial-gradient(circle at center, rgba(74, 222, 128, 0.9), rgba(34, 197, 94, 0.9));
+  }
+
+  .button-icon-container {
+    @apply flex items-center justify-center h-full w-full relative z-10;
+    transform-origin: center;
+    transition: transform 0.3s ease-out;
+  }
+
+  .voice-call-button:hover .button-icon-container {
+    animation: gentle-float 2s infinite ease-in-out;
+  }
+
+  .voice-call-button.active:hover .button-icon-container {
+    animation: gentle-shake 0.82s cubic-bezier(.36,.07,.19,.97) infinite;
+  }
+
+  .phone-icon {
+    @apply w-5 h-5 text-white drop-shadow-md;
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
+    transform-origin: center;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .phone-on {
+    transform: rotate(0deg) scale(1);
+  }
+
+  .phone-off {
+    transform: rotate(135deg) scale(1);
+  }
+
+  /* Integration logos styling */
+  .integration-item {
+    @apply flex items-center justify-center;
+  }
+
+  .integration-item .integration-icon {
+    @apply mr-2 transition-all duration-300;
+  }
+
+  .integration-item:hover .integration-icon {
+    @apply transform scale-110;
+  }
+
+  /* Voice loader animation */
+  .voice-loader {
+    @apply flex justify-center items-center w-full h-full;
+  }
+
+  .voice-loader-circle {
+    @apply w-2 h-2 mx-0.5 bg-white rounded-full;
+    opacity: 0.7;
+  }
+
+  .voice-loader-circle:nth-child(1) {
+    animation: voice-dot-pulse 1s infinite ease-in-out;
+  }
+
+  .voice-loader-circle:nth-child(2) {
+    animation: voice-dot-pulse 1s infinite ease-in-out 0.2s;
+  }
+
+  .voice-loader-circle:nth-child(3) {
+    animation: voice-dot-pulse 1s infinite ease-in-out 0.4s;
+  }
+
+  /* Progress bar styles */
+  .progress-bar {
+    @apply h-1 w-full bg-neutral-800 rounded-full mt-2 overflow-hidden opacity-0;
+    transition: opacity 0.3s ease;
+  }
+
+  .progress-bar.active {
+    @apply opacity-100;
+  }
+
+  .progress-track {
+    @apply h-full w-1/3 bg-green-400 rounded-full;
+    transition: width 0.5s ease;
+    animation: progress-indeterminate 1.5s infinite linear;
+    background: linear-gradient(90deg, transparent, rgba(74, 222, 128, 1), transparent);
+    background-size: 200% 100%;
+  }
+
+  /* Ripple effect */
+  .button-ripple {
+    @apply absolute inset-0 rounded-full opacity-0 pointer-events-none;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.7) 0%, transparent 70%);
+    z-index: 5;
+    transform: scale(0);
+    animation: none;
+  }
+
+  .voice-call-button:active .button-ripple {
+    animation: ripple 0.6s ease-out;
+  }
+
+  /* Keyframe Animations */
+  @keyframes voice-dot-pulse {
+    0%, 80%, 100% { transform: scale(0.8); opacity: 0.7; }
+    40% { transform: scale(1.2); opacity: 1; }
+  }
+
+  @keyframes gentle-float {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-2px) scale(1.05); }
+  }
+
+  @keyframes gentle-shake {
+    0%, 100% { transform: rotate(0); }
+    25% { transform: rotate(-3deg); }
+    75% { transform: rotate(3deg); }
+  }
+
+  @keyframes pulsate {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.9; transform: scale(0.97); }
+  }
+
+  @keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  @keyframes progress-indeterminate {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  @keyframes ripple {
+    0% { transform: scale(0); opacity: 0.7; }
+    100% { transform: scale(4); opacity: 0; }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  /* Animation for expanding case study details */
+  .animate-fadeIn {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Container responsive padding */
+  .container {
+    @apply px-[30px] lg:px-4 mx-auto max-w-[1140px];
+  }
+
+  /* Responsive spacing utilities */
+  .section {
+    @apply relative mt-12 lg:mt-20;
+  }
+
+  .content-spacing {
+    @apply space-y-6 sm:space-y-8 md:space-y-10;
+  }
+
+  /* Responsive grid layouts */
+  .responsive-grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8;
+  }
+
+  /* Responsive text utilities */
+  .responsive-text {
+    @apply text-base sm:text-lg md:text-xl;
+  }
+
+  .responsive-text-sm {
+    @apply text-sm sm:text-base md:text-lg;
+  }
+
+  /* Background decorative elements */
+  .bg-pattern {
+    @apply block absolute top-0 left-0 w-full pointer-events-none bg-no-repeat bg-cover bg-center z-0 h-screen opacity-50;
+  }
+
+  .bg-gradient {
+    background: linear-gradient(0deg, transparent 20%, #F9FBFC 40%, transparent 100%);
+    @apply absolute bottom-[-100px] left-0 w-full h-[200px] pointer-events-none;
+  }
+
+  /* Footer styles */
+  .footer {
+    @apply bg-[#000000] h-20 lg:h-24 w-full relative mt-32;
+  }
+
+  .footer-logo {
+    @apply absolute top-[-36px] lg:top-[-50px] left-0 w-full;
+  }
+
+  .footer-logo img {
+    @apply mx-auto w-[86px] h-[95px] lg:w-[96px] lg:h-[105px];
+  }
+  
+  /* FAQ Section Styles */
+  .faq-item {
+    @apply transition-all duration-200 hover:border-neutral-700;
+  }
+  
+  .answer-wrapper {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+  }
+  
+  .answer-wrapper.open {
+    max-height: 500px;
+    transition: max-height 0.5s ease-in;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply text-transparent bg-gradient-to-b from-neutral-50 to-neutral-300 bg-clip-text;
+  }
+  
+  .border-gradient {
+    @apply relative;
+  }
+  
+  .border-gradient::before {
+    content: '';
+    @apply absolute inset-0 rounded-xl border border-transparent bg-gradient-to-b from-neutral-700 to-transparent opacity-50 pointer-events-none;
+  }
+
+  .noise {
+    @apply relative;
+  }
+
+  .reflective {
+    @apply relative overflow-hidden;
+  }
+  
+  .reflective::after {
+    content: '';
+    @apply absolute -inset-full h-[200%] w-[200%] rotate-45 bg-gradient-to-b from-white to-transparent opacity-5 transition-all duration-1000;
+    animation: reflective 5s ease-in-out infinite;
+  }
+  
+  @keyframes reflective {
+    0% {
+      transform: translateX(-100%) translateY(100%) rotate(45deg);
+    }
+    50% {
+      transform: translateX(100%) translateY(-100%) rotate(45deg);
+    }
+    100% {
+      transform: translateX(-100%) translateY(100%) rotate(45deg);
+    }
+  }
+  
+  @keyframes spotlight {
+    0% {
+      opacity: 0;
+      transform: scale(0.8) translateY(20px);
+    }
+    100% {
+      opacity: 0.7;
+      transform: scale(1) translateY(0);
+    }
+  }
+}
