@@ -415,7 +415,7 @@
 
   /* Container responsive padding */
   .container {
-    @apply px-[30px] lg:px-4 mx-auto max-w-[1140px];
+    @apply px-[30px] lg:px-4 mx-auto max-w-[1140px] relative z-10;
   }
 
   /* Responsive spacing utilities */
@@ -443,7 +443,7 @@
 
   /* Background decorative elements */
   .bg-pattern {
-    @apply block absolute top-0 left-0 w-full pointer-events-none bg-no-repeat bg-cover bg-center z-0 h-screen opacity-50;
+    @apply block absolute top-0 left-0 w-full pointer-events-none bg-no-repeat bg-cover bg-center z-[-1] h-screen opacity-50;
   }
 
   .bg-gradient {

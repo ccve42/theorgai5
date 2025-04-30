@@ -60,7 +60,7 @@ const SolutionSection: React.FC = () => {
             
             <button
               onClick={() => {
-                document.getElementById('booking-section')?.scrollIntoView({ behavior: 'smooth' });
+                document.getElementById('booking-calendar')?.scrollIntoView({ behavior: 'smooth' });
               }}
               className="btn-primary inline-flex items-center gap-3 text-lg px-8 py-4"
             >

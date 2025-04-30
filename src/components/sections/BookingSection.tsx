@@ -13,7 +13,7 @@ const BookingSection: React.FC = () => {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
-              Ready to Grow? Book Your Free AI Consultation Now
+              Book Your Free AI Consultation Now
             </h2>
             <p className="text-xl text-neutral-300 leading-relaxed mb-4 max-w-2xl mx-auto">
               In just 15-30 minutes, discover how AI can specifically help your business capture more leads and improve efficiency. No pressure, just insights.

@@ -4,11 +4,10 @@ import { Send } from 'lucide-react';
 const AssistantDemo: React.FC = () => {
   return (
     <div className="container mx-auto px-4 mb-20">
-      <div className="flex item-center gap-3 mb-10">
+      <div className="flex item-center gap-3 mb-10 justify-center">
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-8">
             See It In Action
           </h2>
-
       </div>
     <div className="glassmorphism rounded-xl overflow-hidden p-8 shadow-glow-sm">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">

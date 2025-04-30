@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 
 const CtaSection: React.FC = () => {
@@ -11,13 +10,16 @@ const CtaSection: React.FC = () => {
           <p className="text-neutral-300 text-lg mb-8 max-w-2xl mx-auto">
             See how our AI solutions can help you capture more leads, delight customers, and reduce costs. Book a personalized demo today.
           </p>
-          <Link 
-            to="/contact" 
+          <button
+            onClick={() => {
+              const demoSection = document.getElementById('booking-calendar');
+              demoSection?.scrollIntoView({ behavior: 'smooth' });
+            }}
             className="btn-primary inline-flex items-center gap-2"
           >
             Book Your Free Demo
             <ArrowRight className="w-4 h-4" />
-          </Link>
+          </button>
         </div>
       </div>
     </section>

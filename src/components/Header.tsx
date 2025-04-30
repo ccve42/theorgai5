@@ -22,8 +22,8 @@ const Header: React.FC = () => {
   
   const navItems = [
     { name: 'Products', id: 'products' },
-    { name: 'Case Studies', id: 'case-studies' },
-    { name: 'Features', id: 'features' }
+    { name: 'Demo', id: 'demos' },
+    { name: 'Process', id: 'processes' }
   ];
   
   return (
@@ -111,7 +111,7 @@ const Header: React.FC = () => {
             }}
             className="mx-4 mt-4 btn-primary text-center"
           >
-            Book a Demo
+            Book a Call
           </button>
         </div>
       </div>
