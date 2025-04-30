@@ -9,7 +9,7 @@ import Cta from '../../components/Cta'
 
 export function HeroWithSpline() {
   return (
-    <section className="relative min-h-screen flex flex-col pt-20 pb-12">
+    <section className="relative min-h-screen flex flex-col pb-12">
       <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.05] via-transparent to-rose-500/[0.05] blur-3xl" />
       <div className="absolute inset-0 bg-grain opacity-[0.03] z-0"></div>
       
