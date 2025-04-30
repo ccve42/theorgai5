@@ -3,7 +3,7 @@ import { PhoneCall, FileCheck, Rocket } from 'lucide-react';
 
 const HowItWorksSection: React.FC = () => {
   return (
-    <section className="py-24 bg-black relative overflow-hidden">
+    <section id="how-it-works" className="py-24 bg-black relative overflow-hidden">
       <div className="absolute inset-0 bg-grain opacity-[0.03] z-0"></div>
       
       {/* Decorative elements */}

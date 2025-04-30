@@ -3,7 +3,7 @@ import { Send } from 'lucide-react';
 
 const AssistantDemo: React.FC = () => {
   return (
-    <div className="container mx-auto px-4 mb-20">
+    <div id="assistant-demo" className="container mx-auto px-4 mb-20">
       <div className="flex item-center gap-3 mb-10 justify-center">
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-8">
             See It In Action

@@ -21,9 +21,9 @@ const Header: React.FC = () => {
   }, [location]);
   
   const navItems = [
-    { name: 'Solution', id: 'solutions' },
-    { name: 'Demo', id: 'demos' },
-    { name: 'Process', id: 'processes' }
+    { name: 'Solution', id: 'solutions', sectionId: 'solution-section' },
+    { name: 'Demo', id: 'demos', sectionId: 'assistant-demo' },
+    { name: 'Process', id: 'processes', sectionId: 'how-it-works' }
   ];
   
   return (
@@ -52,7 +52,7 @@ const Header: React.FC = () => {
             <button
               key={item.id}
               onClick={() => {
-                document.getElementById(item.id)?.scrollIntoView({ behavior: 'smooth' });
+                document.getElementById(item.sectionId)?.scrollIntoView({ behavior: 'smooth' });
               }}
               className={`px-2 py-1 text-sm font-medium transition-all hover:text-white rounded-md ${
                 location.hash === `#${item.id}` ? 'text-white' : 'text-neutral-400'
@@ -92,7 +92,7 @@ const Header: React.FC = () => {
             <button
               key={item.id}
               onClick={() => {
-                document.getElementById(item.id)?.scrollIntoView({ behavior: 'smooth' });
+                document.getElementById(item.sectionId)?.scrollIntoView({ behavior: 'smooth' });
                 setIsMenuOpen(false);
               }}
               className={`py-3 px-4 text-base transition-colors ${

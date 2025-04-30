@@ -3,7 +3,7 @@ import { Bot, Phone, Clock, TrendingUp, Heart } from 'lucide-react';
 
 const SolutionSection: React.FC = () => {
   return (
-    <section className="py-24 bg-black relative overflow-hidden">
+    <section id="solution-section" className="py-24 bg-black relative overflow-hidden">
       <div className="absolute inset-0 bg-grain opacity-[0.03] z-0"></div>
       
       <div className="absolute top-20 right-20 w-96 h-96 rounded-full bg-white/[0.02] blur-3xl pointer-events-none"></div>

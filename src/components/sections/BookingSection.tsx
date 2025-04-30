@@ -32,14 +32,13 @@ const BookingSection: React.FC = () => {
                 }}
               />
             </div>
-            
-            {/* Reassurance text */}
-            <div className="text-center mt-4 pb-4">
+          </div>
+                      {/* Reassurance text */}
+                      <div className="text-center mt-4 pb-4">
               <p className="text-neutral-400 text-sm">
                 Your details are safe. We'll discuss your specific needs and answer all questions.
               </p>
             </div>
-          </div>
         </div>
       </div>
     </section>
