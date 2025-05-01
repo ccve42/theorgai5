@@ -73,46 +73,83 @@ const Header: React.FC = () => {
         
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden p-2 text-neutral-300 hover:text-white rounded-md"
+          className="md:hidden p-2 text-neutral-300 hover:text-white rounded-md transition-colors"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label="Toggle menu"
         >
-          {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
       
       {/* Mobile Navigation */}
       <div 
-        className={`md:hidden absolute top-full left-0 right-0 bg-black/95 backdrop-blur-lg transition-all duration-300 ease-in-out ${
-          isMenuOpen ? 'max-h-[400px] py-4 border-b border-neutral-800' : 'max-h-0 overflow-hidden py-0 border-none'
+        className={`md:hidden fixed inset-0 z-50 transition-all duration-300 ease-in-out ${
+          isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
         }`}
       >
-        <div className="container mx-auto flex flex-col gap-2">
-          {navItems.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => {
-                document.getElementById(item.sectionId)?.scrollIntoView({ behavior: 'smooth' });
-                setIsMenuOpen(false);
-              }}
-              className={`py-3 px-4 text-base transition-colors ${
-                location.hash === `#${item.id}`
-                  ? 'text-white bg-neutral-800/50 rounded-md' 
-                  : 'text-neutral-300 hover:text-white'
-              }`}
-            >
-              {item.name}
-            </button>
-          ))}
-          <button
-            onClick={() => {
-              document.getElementById('booking-calendar')?.scrollIntoView({ behavior: 'smooth' });
-              setIsMenuOpen(false);
-            }}
-            className="mx-4 mt-4 btn-primary text-center"
-          >
-            Book a Call
-          </button>
+        {/* Backdrop */}
+        <div 
+          className={`absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity duration-300 ${
+            isMenuOpen ? 'opacity-100' : 'opacity-0'
+          }`}
+          onClick={() => setIsMenuOpen(false)}
+        />
+        
+        {/* Menu Content */}
+        <div 
+          className={`absolute top-0 right-0 w-full max-w-xs h-full bg-black/95 backdrop-blur-lg transform transition-transform duration-300 ease-in-out ${
+            isMenuOpen ? 'translate-x-0' : 'translate-x-full'
+          }`}
+        >
+          <div className="flex flex-col h-full p-6">
+            <div className="flex justify-end mb-8">
+              <button
+                onClick={() => setIsMenuOpen(false)}
+                className="p-2 text-neutral-300 hover:text-white rounded-md transition-colors"
+              >
+                <X size={24} />
+              </button>
+            </div>
+            
+            <nav className="flex flex-col gap-4">
+              {navItems.map((item, index) => (
+                <button
+                  key={item.id}
+                  onClick={() => {
+                    document.getElementById(item.sectionId)?.scrollIntoView({ behavior: 'smooth' });
+                    setIsMenuOpen(false);
+                  }}
+                  className={`py-3 px-4 text-lg transition-all duration-300 ${
+                    location.hash === `#${item.id}`
+                      ? 'text-white bg-neutral-800/50 rounded-md' 
+                      : 'text-neutral-300 hover:text-white hover:bg-neutral-800/30 rounded-md'
+                  }`}
+                  style={{
+                    transitionDelay: `${index * 50}ms`,
+                    transform: isMenuOpen ? 'translateX(0)' : 'translateX(20px)',
+                    opacity: isMenuOpen ? 1 : 0
+                  }}
+                >
+                  {item.name}
+                </button>
+              ))}
+              
+              <button
+                onClick={() => {
+                  document.getElementById('booking-calendar')?.scrollIntoView({ behavior: 'smooth' });
+                  setIsMenuOpen(false);
+                }}
+                className="mt-6 btn-primary text-center py-3"
+                style={{
+                  transitionDelay: `${navItems.length * 50}ms`,
+                  transform: isMenuOpen ? 'translateX(0)' : 'translateX(20px)',
+                  opacity: isMenuOpen ? 1 : 0
+                }}
+              >
+                Book a Call
+              </button>
+            </nav>
+          </div>
         </div>
       </div>
     </header>
