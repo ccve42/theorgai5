@@ -248,10 +248,10 @@ const VoiceDemo: React.FC = () => {
                   role="progressbar" 
                   aria-valuemin={0} 
                   aria-valuemax={100}
-                  aria-valuenow={isCallLoading ? 50 : 0}
+                  aria-valuenow={isCallLoading ? 100 : 0}
                   aria-label={isCallLoading ? "Loading voice assistant" : ""}
                 >
-                  <div className="progress-track"></div>
+                  <div className="progress-track w-full"></div>
                 </div>
                 <p className="text-neutral-500 text-xs mt-2">
                   {isCallActive ? 'Press button to end call' : 'High-quality voice synthesis demo'}
