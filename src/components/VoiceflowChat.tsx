@@ -20,6 +20,22 @@ const VoiceflowChat: React.FC = () => {
     const script = document.createElement('script');
     script.type = 'text/javascript';
     script.onload = () => {
+      // Add custom styles for the Voiceflow widget
+      const style = document.createElement('style');
+      style.textContent = `
+        .vfrc-widget--chat {
+          height: 100vh !important;
+          max-height: 100vh !important;
+        }
+        .vfrc-widget--chat .vfrc-chat {
+          height: 100% !important;
+        }
+        .vfrc-widget--chat .vfrc-chat-container {
+          height: 100% !important;
+        }
+      `;
+      document.head.appendChild(style);
+
       window.voiceflow.chat.load({
         verify: { projectID: '679b7bcc4134f182a21ea963' },
         url: 'https://general-runtime.voiceflow.com',
