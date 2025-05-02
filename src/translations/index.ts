@@ -89,9 +89,10 @@ export const translations = {
       ]
     },
     booking: {
-      title: "Book Your Free AI Consultation Now",
+      title: "Schedule Your Free AI Strategy Session",
       description: "In just 15-30 minutes, discover how AI can specifically help your business capture more leads and improve efficiency. No pressure, just insights.",
-      button: "Book Your Free Call"
+      button: "Book Your Free Call",
+      reassurance: "Your details are safe. We'll discuss your specific needs and answer all questions."
     },
     faq: {
       title: "Frequently Asked Questions",
@@ -298,13 +299,14 @@ export const translations = {
       ]
     },
     booking: {
-      title: "AI導入 無料相談のご予約",
+      title: "AIソリューション 無料相談のご予約はこちら",
       description: "わずか15分～30分で、貴社ビジネスのリード獲得や業務効率化にAIがどう貢献できるか具体的にご説明します。無理な勧誘は一切ありません。有益な情報をご提供することをお約束します。",
-      button: "無料相談を予約する"
+      button: "無料相談を予約する",
+      reassurance: "お客様の情報は厳重に管理いたします。当日は貴社の具体的な状況や課題についてお伺いし、あらゆるご質問にお答えします。"
     },
     faq: {
       title: "よくある質問",
-      subtitle: "AIソリューションに関する一般的な質問への回答をご覧ください。",
+      subtitle: "AIソリューションに関する一般的な質問とその回答をまとめました。",
       questions: [
         {
           question: "AIソリューションの導入にはどのくらいの期間がかかりますか？",

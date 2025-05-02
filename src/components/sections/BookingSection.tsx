@@ -43,7 +43,7 @@ const BookingSection: React.FC<BookingSectionProps> = ({ lang }) => {
           {/* Reassurance text */}
           <div className="text-center mt-4 pb-4">
             <p className="text-neutral-400 text-sm">
-              Your details are safe. We'll discuss your specific needs and answer all questions.
+              {t.reassurance}
             </p>
           </div>
         </div>

@@ -11,23 +11,6 @@ const SolutionSection: React.FC = () => {
   const { lang } = useOutletContext<OutletContext>();
   const t = translations[lang].solution;
 
-  const features = {
-    en: [
-      "✅ Capture Every Lead, 24/7",
-      "✅ Slash Response Times Dramatically",
-      "✅ Reduce Operational Costs Significantly",
-      "✅ Boost Customer Satisfaction & Loyalty",
-      "✅ Scale Support Instantly, On Demand"
-    ],
-    jp: [
-      "✅ 24時間365日、すべてのリードを捕捉",
-      "✅ 対応時間を劇的に短縮",
-      "✅ 運用コストを大幅に削減",
-      "✅ 顧客満足度とロイヤルティを向上",
-      "✅ 需要に応じて即座にサポートを拡張"
-    ]
-  };
-
   return (
     <section id="solution-section" className="py-24 bg-black relative overflow-hidden">
       <div className="absolute inset-0 bg-grain opacity-[0.03] z-0"></div>
@@ -62,14 +45,14 @@ const SolutionSection: React.FC = () => {
             </div>
             
             <div className="space-y-4 text-left mb-10">
-              {features[lang].map((feature, index) => (
+              {t.benefits.map((benefit, index) => (
                 <div key={index} className="flex items-center gap-3 p-4 bg-black/40 rounded-xl border border-neutral-800 hover:border-neutral-700 transition-all">
                   {index === 0 && <Bot className="w-6 h-6 text-white flex-shrink-0" />}
                   {index === 1 && <Clock className="w-6 h-6 text-white flex-shrink-0" />}
                   {index === 2 && <TrendingUp className="w-6 h-6 text-white flex-shrink-0" />}
                   {index === 3 && <Heart className="w-6 h-6 text-white flex-shrink-0" />}
                   {index === 4 && <TrendingUp className="w-6 h-6 text-white flex-shrink-0" />}
-                  <p className="text-white">{feature}</p>
+                  <p className="text-white">{benefit}</p>
                 </div>
               ))}
             </div>
