@@ -1,53 +1,32 @@
 import React, { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
+import { translations } from '../../translations';
 
-const FaqSection: React.FC = () => {
+interface FaqSectionProps {
+  lang: 'en' | 'jp';
+}
+
+const FaqSection: React.FC<FaqSectionProps> = ({ lang }) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const t = translations[lang].faq;
 
   const handleToggle = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
-
-  const faqs = [
-    {
-      question: "How quickly can I implement your AI solutions?",
-      answer: "Our AI solutions can be deployed in as little as 2-4 weeks, depending on the complexity of your requirements and the level of customization needed. Our implementation team works closely with you to ensure a smooth integration with your existing systems."
-    },
-    {
-      question: "Do your AI solutions integrate with my existing CRM?",
-      answer: "Yes, our AI solutions are designed to integrate seamlessly with popular CRM platforms including Salesforce, HubSpot, Zoho, Microsoft Dynamics, and many others. We also offer custom integration services for proprietary systems."
-    },
-    {
-      question: "How is the AI trained to understand my business needs?",
-      answer: "We use a combination of pre-trained models and custom training specific to your industry and business requirements. During implementation, we gather example conversations, common queries, and business rules to tailor the AI to your specific needs."
-    },
-    {
-      question: "Can the AI handle multiple languages?",
-      answer: "Yes, our AI solutions support multiple languages including English, Spanish, French, German, Chinese, Japanese, and many others. This allows you to provide consistent service to customers around the world."
-    },
-    {
-      question: "What kind of ROI can I expect from implementing your solutions?",
-      answer: "Most of our clients see ROI within 3-6 months of implementation. Typical results include 30-60% reduction in customer service costs, 40% increase in lead conversion rates, and significant improvements in customer satisfaction scores."
-    },
-    {
-      question: "Still have questions?",
-      answer: "Click the blue circle on the bottom right of your screen. Ask anything about AI Organization to the Live Chat."
-    }
-  ];
 
   return (
     <section className="py-20 bg-black/90">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-white text-3xl font-semibold mb-4">Frequently Asked Questions</h2>
+            <h2 className="text-white text-3xl font-semibold mb-4">{t.title}</h2>
             <p className="text-neutral-300">
-              Find quick answers to common questions about our AI solutions.
+              {t.subtitle}
             </p>
           </div>
           
           <div className="space-y-4">
-            {faqs.map((faq, index) => (
+            {t.questions.map((faq, index) => (
               <div 
                 key={index}
                 className="faq-item glassmorphism rounded-xl overflow-hidden"
@@ -80,8 +59,8 @@ const FaqSection: React.FC = () => {
           </div>
           
           <div className="text-center mt-16 space-y-4">
-            <h3 className="text-white text-2xl font-semibold">Ready to Transform Your Business?</h3>
-            <p className="text-neutral-300 mb-6">Book your personalized demo call in just 10 seconds - no lengthy forms required.</p>
+            <h3 className="text-white text-2xl font-semibold">{t.cta.title}</h3>
+            <p className="text-neutral-300 mb-6">{t.cta.description}</p>
             <div>
               <button
                 onClick={() => {
@@ -90,7 +69,7 @@ const FaqSection: React.FC = () => {
                 }}
                 className="btn-primary inline-flex items-center gap-2 text-lg px-8 py-4"
               >
-                Book Your Call in 10 Seconds
+                {t.cta.button}
               </button>
               <div className="flex items-center justify-center gap-2 mt-4">
                 <img
@@ -98,7 +77,7 @@ const FaqSection: React.FC = () => {
                   alt="Company Logo"
                   className="w-10 h-10 object-cover"
                 />
-                <span className="text-white/80 text-base font-medium">Limited Spaces Left</span>
+                <span className="text-white/80 text-base font-medium">{t.cta.note}</span>
               </div>
             </div>
           </div>

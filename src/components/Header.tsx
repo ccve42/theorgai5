@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Globe } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
+import { translations } from '../translations';
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  lang: 'en' | 'jp';
+}
+
+const Header: React.FC<HeaderProps> = ({ lang }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+  
+  const t = translations[lang].header;
   
   useEffect(() => {
     const handleScroll = () => {
@@ -21,9 +28,9 @@ const Header: React.FC = () => {
   }, [location]);
   
   const navItems = [
-    { name: 'Solution', id: 'solutions', sectionId: 'solution-section' },
-    { name: 'Demo', id: 'demos', sectionId: 'assistant-demo' },
-    { name: 'Process', id: 'processes', sectionId: 'how-it-works' }
+    { name: t.navigation.solution, sectionId: 'solution-section' },
+    { name: t.navigation.demo, sectionId: 'assistant-demo' },
+    { name: t.navigation.process, sectionId: 'how-it-works' }
   ];
   
   return (
@@ -34,13 +41,13 @@ const Header: React.FC = () => {
     >
       <div className="container mx-auto flex items-center justify-between">
         <Link 
-          to="/" 
+          to={`/${lang}`}
           className="flex items-center gap-1.5 sm:gap-2 text-white font-bold text-lg sm:text-xl"
         >
           <div className="w-20 h-20 sm:w-24 sm:h-24 relative">
             <img 
               src="/images/theorgai_white_logo.png" 
-              alt="Company Logo" 
+              alt={t.logo.alt}
               className="w-full h-full object-cover"
             />
           </div>
@@ -50,12 +57,12 @@ const Header: React.FC = () => {
         <nav className="hidden md:flex items-center gap-4 lg:gap-8">
           {navItems.map((item) => (
             <button
-              key={item.id}
+              key={item.sectionId}
               onClick={() => {
                 document.getElementById(item.sectionId)?.scrollIntoView({ behavior: 'smooth' });
               }}
               className={`px-2 py-1 text-sm font-medium transition-all hover:text-white rounded-md ${
-                location.hash === `#${item.id}` ? 'text-white' : 'text-neutral-400'
+                location.hash === `#${item.sectionId}` ? 'text-white' : 'text-neutral-400'
               }`}
             >
               {item.name}
@@ -67,7 +74,7 @@ const Header: React.FC = () => {
             }}
             className="btn-primary"
           >
-            Book a Demo
+            {t.buttons.bookDemo}
           </button>
         </nav>
         
@@ -75,7 +82,7 @@ const Header: React.FC = () => {
         <button
           className="md:hidden p-2 text-neutral-300 hover:text-white rounded-md transition-colors"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          aria-label="Toggle menu"
+          aria-label={t.menu.toggle}
         >
           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -114,13 +121,13 @@ const Header: React.FC = () => {
             <nav className="flex flex-col gap-4">
               {navItems.map((item, index) => (
                 <button
-                  key={item.id}
+                  key={item.sectionId}
                   onClick={() => {
                     document.getElementById(item.sectionId)?.scrollIntoView({ behavior: 'smooth' });
                     setIsMenuOpen(false);
                   }}
                   className={`py-3 px-4 text-lg transition-all duration-300 ${
-                    location.hash === `#${item.id}`
+                    location.hash === `#${item.sectionId}`
                       ? 'text-white bg-neutral-800/50 rounded-md' 
                       : 'text-neutral-300 hover:text-white hover:bg-neutral-800/30 rounded-md'
                   }`}
@@ -146,7 +153,7 @@ const Header: React.FC = () => {
                   opacity: isMenuOpen ? 1 : 0
                 }}
               >
-                Book a Call
+                {t.buttons.bookDemo}
               </button>
             </nav>
           </div>

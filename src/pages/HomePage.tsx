@@ -12,8 +12,15 @@ import BookingSection from '../components/sections/BookingSection';
 import FaqSection from '../components/sections/FaqSection';
 import VoiceDemo from '../components/VoiceDemo';
 import AssistantDemo from '../components/AssistantDemo';
+import { useOutletContext } from 'react-router-dom';
+
+interface OutletContext {
+  lang: 'en' | 'jp';
+}
 
 const HomePage: React.FC = () => {
+  const { lang } = useOutletContext<OutletContext>();
+
   useEffect(() => {
     (async function () {
       const cal = await getCalApi();
@@ -24,14 +31,14 @@ const HomePage: React.FC = () => {
   return (
     <>
       {/* Hero Section with Spline Integration */}
-      <HeroWithSpline />
-      <ProblemSection />
-      <SolutionSection />
-      <AssistantDemo />
-      <VoiceDemo />
-      <HowItWorksSection />
-      <BookingSection />
-      <FaqSection />
+      <HeroWithSpline lang={lang} />
+      <ProblemSection lang={lang} />
+      <SolutionSection lang={lang} />
+      <AssistantDemo lang={lang} />
+      <VoiceDemo lang={lang} />
+      <HowItWorksSection lang={lang} />
+      <BookingSection lang={lang} />
+      <FaqSection lang={lang} />
     </>
   );
 };

@@ -5,27 +5,35 @@ import Footer from './components/Footer';
 import { CursorSpotlight } from './components/ui/cursor-spotlight';
 import VoiceflowChat from './components/VoiceflowChat';
 
-const Layout: React.FC = () => {
+interface LayoutProps {
+  lang: 'en' | 'jp';
+}
+
+const Layout: React.FC<LayoutProps> = ({ lang }) => {
   const location = useLocation();
   
   useEffect(() => {
-    // Update page title
-    document.title = 'AI Organization - Solve Problems Others Can\'t with AI';
+    // Update page title based on language
+    const titles = {
+      en: 'AI Organization - Solve Problems Others Can\'t with AI',
+      jp: 'AI Organization - AIで他の人が解決できない問題を解決する'
+    };
+    document.title = titles[lang];
     
     // Scroll to top on route change
     window.scrollTo(0, 0);
-  }, [location]);
+  }, [location, lang]);
   
-  const showHeader = !['/terms', '/privacy'].includes(location.pathname);
+  const showHeader = !location.pathname.endsWith('/terms') && !location.pathname.endsWith('/privacy');
   
   return (
     <div className="flex flex-col min-h-screen overflow-x-hidden">
       <CursorSpotlight />
-      {showHeader && <Header />}
+      {showHeader && <Header lang={lang} />}
       <main className="flex-grow w-full">
-        <Outlet />
+        <Outlet context={{ lang }} />
       </main>
-      <Footer />
+      <Footer lang={lang} />
       <VoiceflowChat />
     </div>
   );

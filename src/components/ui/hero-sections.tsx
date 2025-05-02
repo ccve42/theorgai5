@@ -3,11 +3,18 @@ import { SplineScene } from './spline'
 import { Link } from 'react-router-dom'
 import { ElegantShape } from './shape-landing-hero'
 import { Spotlight } from './spotlight'
-import FeaturesSection from '../../components/sections/FeaturesSection'
 import SocialProof from '../../components/sections/SocialProof'
 import Cta from '../../components/Cta'
+import { translations } from '../../translations'
 
-export function HeroWithSpline() {
+interface HeroWithSplineProps {
+  lang: 'en' | 'jp';
+}
+
+export function HeroWithSpline({ lang }: HeroWithSplineProps) {
+  const t = translations[lang].hero;
+  const socialProofT = translations[lang].socialProof;
+
   return (
     <section className="relative min-h-screen flex flex-col pb-12">
       <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.05] via-transparent to-rose-500/[0.05] blur-3xl" />
@@ -46,15 +53,15 @@ export function HeroWithSpline() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center relative z-10 p-4 sm:p-8 md:p-12 lg:p-20">
           <div className="text-center lg:text-left">
             <h1 className="mb-4 lg:mb-6 text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight">
-              <span className="bg-clip-text text-transparent bg-gradient-to-b from-white to-white/80">Never Miss a Lead Again With</span>
+              <span className="bg-clip-text text-transparent bg-gradient-to-b from-white to-white/80">{t.title1}</span>
               <br />
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 via-white/90 to-rose-300">24/7 AI Assistant</span>
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 via-white/90 to-rose-300">{t.title2}</span>
             </h1>
             <p className="text-sm sm:text-base md:text-lg text-white/40 mb-6 lg:mb-10 leading-relaxed font-light tracking-wide max-w-xl mx-auto lg:mx-0">
-              Transform customer engagement with our AI Assistance and AI Voice Assistance solutions. Streamline operations, capture leads, and deliver 24/7 support. Say goodbye to missed opportunities and high costs.
+              {t.description}
             </p>
             <div className="flex justify-center lg:justify-start">
-              <Cta />
+              <Cta lang={lang} />
             </div>
           </div>
           
@@ -66,7 +73,7 @@ export function HeroWithSpline() {
           </div>
         </div>
       </div>
-      <SocialProof />
+      <SocialProof lang={lang} />
     </section>
   )
 }

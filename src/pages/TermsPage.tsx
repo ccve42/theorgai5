@@ -1,7 +1,15 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useOutletContext } from 'react-router-dom';
+import { translations } from '../translations';
+
+interface OutletContext {
+  lang: 'en' | 'jp';
+}
 
 const TermsPage: React.FC = () => {
+  const { lang } = useOutletContext<OutletContext>();
+  const t = translations[lang].terms;
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -10,41 +18,41 @@ const TermsPage: React.FC = () => {
     <div className="min-h-screen bg-black text-white">
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-3xl mx-auto">
-          <h1 className="text-3xl font-bold mb-8">Terms & Conditions</h1>
+          <h1 className="text-3xl font-bold mb-8">{t.title}</h1>
           
           <div className="space-y-6 text-neutral-300">
             <section>
-              <h2 className="text-xl font-semibold mb-4">1. Introduction</h2>
+              <h2 className="text-xl font-semibold mb-4">{t.sections.introduction.title}</h2>
               <p>
-                Welcome to AI Organization. By accessing and using our website and services, you agree to be bound by these Terms and Conditions. Please read them carefully before using our services.
+                {t.sections.introduction.content}
               </p>
             </section>
 
             <section>
-              <h2 className="text-xl font-semibold mb-4">2. Use of Services</h2>
+              <h2 className="text-xl font-semibold mb-4">{t.sections.useOfServices.title}</h2>
               <p>
-                Our services are intended for business use. You agree to use our services only for lawful purposes and in accordance with these Terms. You are responsible for maintaining the confidentiality of your account information.
+                {t.sections.useOfServices.content}
               </p>
             </section>
 
             <section>
-              <h2 className="text-xl font-semibold mb-4">3. Intellectual Property</h2>
+              <h2 className="text-xl font-semibold mb-4">{t.sections.intellectualProperty.title}</h2>
               <p>
-                All content, features, and functionality of our services are owned by AI Organization and are protected by international copyright, trademark, and other intellectual property laws.
+                {t.sections.intellectualProperty.content}
               </p>
             </section>
 
             <section>
-              <h2 className="text-xl font-semibold mb-4">4. Limitation of Liability</h2>
+              <h2 className="text-xl font-semibold mb-4">{t.sections.limitationOfLiability.title}</h2>
               <p>
-                AI Organization shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use of or inability to use our services.
+                {t.sections.limitationOfLiability.content}
               </p>
             </section>
 
             <section>
-              <h2 className="text-xl font-semibold mb-4">5. Changes to Terms</h2>
+              <h2 className="text-xl font-semibold mb-4">{t.sections.changesToTerms.title}</h2>
               <p>
-                We reserve the right to modify these Terms at any time. We will notify users of any material changes by posting the new Terms on our website.
+                {t.sections.changesToTerms.content}
               </p>
             </section>
 
@@ -54,7 +62,7 @@ const TermsPage: React.FC = () => {
                 className="text-blue-400 hover:text-blue-300 transition-colors"
                 onClick={() => window.scrollTo(0, 0)}
               >
-                ← Back to Home
+                {t.backToHome}
               </Link>
             </div>
           </div>

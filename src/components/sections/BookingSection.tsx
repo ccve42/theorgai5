@@ -1,7 +1,14 @@
 import React from 'react';
 import Cal from "@calcom/embed-react";
+import { translations } from '../../translations';
 
-const BookingSection: React.FC = () => {
+interface BookingSectionProps {
+  lang: 'en' | 'jp';
+}
+
+const BookingSection: React.FC<BookingSectionProps> = ({ lang }) => {
+  const t = translations[lang].booking;
+
   return (
     <section id="booking-calendar" className="py-20 bg-black scroll-mt-20">
       {/* Background decorative elements */}
@@ -13,10 +20,10 @@ const BookingSection: React.FC = () => {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
-              Book Your Free AI Consultation Now
+              {t.title}
             </h2>
             <p className="text-xl text-neutral-300 leading-relaxed mb-4 max-w-2xl mx-auto">
-              In just 15-30 minutes, discover how AI can specifically help your business capture more leads and improve efficiency. No pressure, just insights.
+              {t.description}
             </p>
           </div>
           
@@ -33,12 +40,12 @@ const BookingSection: React.FC = () => {
               />
             </div>
           </div>
-                      {/* Reassurance text */}
-                      <div className="text-center mt-4 pb-4">
-              <p className="text-neutral-400 text-sm">
-                Your details are safe. We'll discuss your specific needs and answer all questions.
-              </p>
-            </div>
+          {/* Reassurance text */}
+          <div className="text-center mt-4 pb-4">
+            <p className="text-neutral-400 text-sm">
+              Your details are safe. We'll discuss your specific needs and answer all questions.
+            </p>
+          </div>
         </div>
       </div>
     </section>
