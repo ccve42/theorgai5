@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Phone, PhoneOff, Volume2 } from 'lucide-react';
 import Vapi from '@vapi-ai/web';
 import { translations } from '../translations';
+import { ElegantShape } from './ui/shape-landing-hero';
 
 interface VoiceDemoProps {
   lang: 'en' | 'jp';
@@ -127,148 +128,180 @@ const VoiceDemo: React.FC<VoiceDemoProps> = ({ lang }) => {
   };
   
   return (
-    <div className="container mx-auto px-4 mb-20">
-      <div className="flex items-center gap-3 mb-10">
-        <h3 className="text-white text-2xl font-semibold">{t.title}</h3>
-        <div className="h-px flex-grow bg-gradient-to-r from-white/30 to-transparent"></div>
+    <section className="py-24 bg-black relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.05] via-transparent to-rose-500/[0.05] blur-3xl" />
+      <div className="absolute inset-0 bg-grain opacity-[0.03] z-0"></div>
+      
+      <div className="absolute inset-0 overflow-hidden">
+        <ElegantShape
+          delay={0.3}
+          width={600}
+          height={140}
+          rotate={12}
+          gradient="from-indigo-500/[0.15]"
+          className="left-[-10%] md:left-[-5%] top-[15%] md:top-[20%]"
+        />
+        <ElegantShape
+          delay={0.5}
+          width={500}
+          height={120}
+          rotate={-15}
+          gradient="from-rose-500/[0.15]"
+          className="right-[-5%] md:right-[0%] top-[70%] md:top-[75%]"
+        />
+        <ElegantShape
+          delay={0.4}
+          width={300}
+          height={80}
+          rotate={-8}
+          gradient="from-violet-500/[0.15]"
+          className="left-[5%] md:left-[10%] bottom-[5%] md:bottom-[10%]"
+        />
       </div>
-  
-      <div className="space-y-8">
-        <div className="glassmorphism rounded-xl overflow-hidden p-8 md:p-10">
-          {/* Hidden audio element */}
-          <audio
-            ref={audioRef}
-            onEnded={() => setIsPlaying(false)}
-            onTimeUpdate={() => setCurrentTime(audioRef.current?.currentTime || 0)}
-            src="https://assets.mixkit.co/music/preview/mixkit-tech-house-vibes-130.mp3"
-            loop
-          />
-          
-          <div className="flex flex-col md:flex-row gap-8 items-center">
-            {/* Phone visualization */}
-            <div className="w-full md:w-2/5 relative perspective-1000">
-              <div className="relative w-40 h-80 mx-auto rounded-3xl glossy-black border border-neutral-700 overflow-hidden shadow-lg">
-                {/* Phone screen */}
-                <div className="absolute inset-1 rounded-2xl bg-black/80 flex flex-col justify-between overflow-hidden">
-                  {/* Phone header */}
-                  <div className="p-3 flex justify-between items-center">
-                    <span className="text-white text-xs">9:41</span>
-                    <div className="w-16 h-4 bg-black rounded-full mx-auto"></div>
-                    <div className="flex gap-1">
-                      <Volume2 className="w-3 h-3 text-white" />
-                    </div>
-                  </div>
-                  
-                  {/* Call visualization */}
-                  <div className="flex-1 flex flex-col items-center justify-center gap-3">
-                    <div className="w-24 h-24 rounded-full bg-neutral-800 border border-neutral-700 flex items-center justify-center relative overflow-hidden">
-                      <div className="absolute inset-0 bg-gradient-to-b from-neutral-700/30 to-transparent"></div>
-                      <Phone className="w-12 h-12 text-white" />
-                    </div>
-                    <h4 className="text-white text-lg font-medium">{t.phone.title}</h4>
-                    <p className="text-neutral-400 text-sm">00:{formatTime(currentTime)}</p>
-                  </div>
-                  
-                  {/* Phone action buttons */}
-                  <div className="p-4 flex justify-center">
-                    <button
-                      onClick={isCallActive ? endCall : startCall}
-                      className={`w-12 h-12 rounded-full flex items-center justify-center ${
-                        isCallActive ? 'bg-red-500 hover:bg-red-600' : 'bg-green-500 hover:bg-green-600'
-                      } transition-all duration-300`}
-                    >
-                      {isCallActive ? 
-                        <PhoneOff className="w-6 h-6 text-white" /> : 
-                        <Phone className="w-6 h-6 text-white" />}
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
+
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="flex items-center gap-3 mb-10">
+          <h3 className="text-white text-2xl font-semibold">{t.title}</h3>
+          <div className="h-px flex-grow bg-gradient-to-r from-white/30 to-transparent"></div>
+        </div>
+    
+        <div className="space-y-8">
+          <div className="glassmorphism rounded-xl overflow-hidden p-8 md:p-10">
+            {/* Hidden audio element */}
+            <audio
+              ref={audioRef}
+              onEnded={() => setIsPlaying(false)}
+              onTimeUpdate={() => setCurrentTime(audioRef.current?.currentTime || 0)}
+              src="https://assets.mixkit.co/music/preview/mixkit-tech-house-vibes-130.mp3"
+              loop
+            />
             
-            {/* Voice waveform */}
-            <div className="w-full md:w-3/5">
-              <h3 className="text-white text-2xl font-semibold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-white to-neutral-400">{t.subtitle}</h3>
-              <p className="text-neutral-300 mb-6">
-                {t.description}
-              </p>
-              
-              {/* Waveform visualization */}
-              <div className="h-24 mb-6 flex items-center p-3 border border-neutral-800 rounded-xl bg-black/40 backdrop-blur-sm shadow-inner">
-                <div 
-                  ref={waveformRef}
-                  className="w-full h-full flex items-center justify-between gap-1"
-                >
-                  {Array.from({ length: 50 }).map((_, i) => {
-                    const height = isCallActive ? Math.max(30, volume * 100) : 30;
-                    return (
-                      <div 
-                        key={i}
-                        className={`waveform-bar w-1 bg-white rounded-full opacity-50 transition-all duration-100 ease-out ${
-                          isCallActive ? 'animate-pulse' : ''
-                        }`}
-                        style={{ 
-                          height: `${height}%`,
-                          animationDelay: `${i * 20}ms`,
-                        }}
-                      />
-                    );
-                  })}
+            <div className="flex flex-col md:flex-row gap-8 items-center">
+              {/* Phone visualization */}
+              <div className="w-full md:w-2/5 relative perspective-1000">
+                <div className="relative w-40 h-80 mx-auto rounded-3xl glossy-black border border-neutral-700 overflow-hidden shadow-lg">
+                  {/* Phone screen */}
+                  <div className="absolute inset-1 rounded-2xl bg-black/80 flex flex-col justify-between overflow-hidden">
+                    {/* Phone header */}
+                    <div className="p-3 flex justify-between items-center">
+                      <span className="text-white text-xs">9:41</span>
+                      <div className="w-16 h-4 bg-black rounded-full mx-auto"></div>
+                      <div className="flex gap-1">
+                        <Volume2 className="w-3 h-3 text-white" />
+                      </div>
+                    </div>
+                    
+                    {/* Call visualization */}
+                    <div className="flex-1 flex flex-col items-center justify-center gap-3">
+                      <div className="w-24 h-24 rounded-full bg-neutral-800 border border-neutral-700 flex items-center justify-center relative overflow-hidden">
+                        <div className="absolute inset-0 bg-gradient-to-b from-neutral-700/30 to-transparent"></div>
+                        <Phone className="w-12 h-12 text-white" />
+                      </div>
+                      <h4 className="text-white text-lg font-medium">{t.phone.title}</h4>
+                      <p className="text-neutral-400 text-sm">00:{formatTime(currentTime)}</p>
+                    </div>
+                    
+                    {/* Phone action buttons */}
+                    <div className="p-4 flex justify-center">
+                      <button
+                        onClick={isCallActive ? endCall : startCall}
+                        className={`w-12 h-12 rounded-full flex items-center justify-center ${
+                          isCallActive ? 'bg-red-500 hover:bg-red-600' : 'bg-green-500 hover:bg-green-600'
+                        } transition-all duration-300`}
+                      >
+                        {isCallActive ? 
+                          <PhoneOff className="w-6 h-6 text-white" /> : 
+                          <Phone className="w-6 h-6 text-white" />}
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
               
-              {/* Player controls */}
-              <div className="flex items-center gap-6">
-                <button
-                  onClick={isCallActive ? endCall : startCall}
-                  disabled={isCallLoading}
-                  aria-label={isCallActive ? "End voice call" : "Start voice call"}
-                  className={`voice-call-button ${isCallActive ? 'active' : ''} ${isCallLoading ? 'loading' : ''} shadow-2xl`}
-                >
-                  <div className="button-icon-container">
-                    {isCallLoading ? (
-                      <div className="voice-loader">
-                        <div className="voice-loader-circle"></div>
-                        <div className="voice-loader-circle"></div>
-                        <div className="voice-loader-circle"></div>
-                      </div>
-                    ) : isCallActive ? (
-                      <PhoneOff className="phone-icon phone-off" />
-                    ) : (
-                      <Phone className="phone-icon phone-on" />
-                    )}
-                  </div>
-                  <div className="button-ripple"></div>
-                </button>
+              {/* Voice waveform */}
+              <div className="w-full md:w-3/5">
+                <h3 className="text-white text-2xl font-semibold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-white to-neutral-400">{t.subtitle}</h3>
+                <p className="text-neutral-300 mb-6">
+                  {t.description}
+                </p>
                 
-                <div className="flex-1">
-                  <p className="text-white text-sm font-medium mb-2">
-                    {isCallLoading 
-                      ? t.status.connecting
-                      : isCallActive 
-                        ? t.status.inProgress
-                        : t.status.startDemo}
-                  </p>
+                {/* Waveform visualization */}
+                <div className="h-24 mb-6 flex items-center p-3 border border-neutral-800 rounded-xl bg-black/40 backdrop-blur-sm shadow-inner">
                   <div 
-                    className={`progress-bar ${isCallLoading ? 'active' : ''}`}
-                    role="progressbar" 
-                    aria-valuemin={0} 
-                    aria-valuemax={100}
-                    aria-valuenow={isCallLoading ? 100 : 0}
-                    aria-label={isCallLoading ? "Loading voice assistant" : ""}
+                    ref={waveformRef}
+                    className="w-full h-full flex items-center justify-between gap-1"
                   >
-                    <div className="progress-track w-full"></div>
+                    {Array.from({ length: 50 }).map((_, i) => {
+                      const height = isCallActive ? Math.max(30, volume * 100) : 30;
+                      return (
+                        <div 
+                          key={i}
+                          className={`waveform-bar w-1 bg-white rounded-full opacity-50 transition-all duration-100 ease-out ${
+                            isCallActive ? 'animate-pulse' : ''
+                          }`}
+                          style={{ 
+                            height: `${height}%`,
+                            animationDelay: `${i * 20}ms`,
+                          }}
+                        />
+                      );
+                    })}
                   </div>
-                  <p className="text-neutral-500 text-xs mt-2">
-                    {isCallActive ? t.status.endCall : t.status.quality}
-                  </p>
+                </div>
+                
+                {/* Player controls */}
+                <div className="flex items-center gap-6">
+                  <button
+                    onClick={isCallActive ? endCall : startCall}
+                    disabled={isCallLoading}
+                    aria-label={isCallActive ? "End voice call" : "Start voice call"}
+                    className={`voice-call-button ${isCallActive ? 'active' : ''} ${isCallLoading ? 'loading' : ''} shadow-2xl`}
+                  >
+                    <div className="button-icon-container">
+                      {isCallLoading ? (
+                        <div className="voice-loader">
+                          <div className="voice-loader-circle"></div>
+                          <div className="voice-loader-circle"></div>
+                          <div className="voice-loader-circle"></div>
+                        </div>
+                      ) : isCallActive ? (
+                        <PhoneOff className="phone-icon phone-off" />
+                      ) : (
+                        <Phone className="phone-icon phone-on" />
+                      )}
+                    </div>
+                    <div className="button-ripple"></div>
+                  </button>
+                  
+                  <div className="flex-1">
+                    <p className="text-white text-sm font-medium mb-2">
+                      {isCallLoading 
+                        ? t.status.connecting
+                        : isCallActive 
+                          ? t.status.inProgress
+                          : t.status.startDemo}
+                    </p>
+                    <div 
+                      className={`progress-bar ${isCallLoading ? 'active' : ''}`}
+                      role="progressbar" 
+                      aria-valuemin={0} 
+                      aria-valuemax={100}
+                      aria-valuenow={isCallLoading ? 100 : 0}
+                      aria-label={isCallLoading ? "Loading voice assistant" : ""}
+                    >
+                      <div className="progress-track w-full"></div>
+                    </div>
+                    <p className="text-neutral-500 text-xs mt-2">
+                      {isCallActive ? t.status.endCall : t.status.quality}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
